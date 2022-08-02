@@ -90,7 +90,7 @@ const userPATCH = (req, res = response) => {
 const userDELETE = async (req, res = response) => {
     const {id} = req.params;
 
-    //Borrado físic
+    //Borrado físico
     // const user = await User.findByIdAndDelete(id);
 
     const user = await User.findByIdAndUpdate(id, {state: false});
