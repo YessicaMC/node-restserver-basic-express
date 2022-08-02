@@ -1,5 +1,6 @@
 const express = require('express')
-const cors = require('cors')
+const cors = require('cors');
+const { dbConnection } = require('../database/config');
 
 class Server{
     constructor(){
@@ -8,15 +9,19 @@ class Server{
 
         this.usersPath = '/api/user';
 
+        //Connect DB
+        this.database();
+
         //Middlewares (Función que siempre se va a ejecutar cuando lancemos nuestro servidor)
-        this.middlewares()
+        /** Se ejecuta antes de que se ejecute cualquier ruta */
+        this.middlewares();
 
         //App routes
         this.routes();
     }
 
     routes(){
-        this.app.use(this.usersPath, require('../routes/user'));
+        this.app.use(this.usersPath, require('../routes/user_routes'));
     }
 
     listen(){
@@ -34,6 +39,10 @@ class Server{
 
         //Receive and parse JSON as a BODY
         this.app.use(express.json())
+    }
+
+    database = async () => {
+        await dbConnection();
     }
 }
 
