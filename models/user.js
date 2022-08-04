@@ -48,7 +48,8 @@ const UserSchema = Schema({
 /** Tiene que ser un funcition() */
 UserSchema.methods.toJSON = function() {
     /** Con '...user' todos las propiedades apartir de esa instruccion las va a contener en un objeto llamada user */
-    const {__v, password, ...user} = this.toObject();
+    const {__v, password, _id, ...user} = this.toObject();
+    user.uid = _id;
     return user;
 }   
 

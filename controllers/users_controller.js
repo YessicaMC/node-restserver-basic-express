@@ -92,12 +92,15 @@ const userDELETE = async (req, res = response) => {
 
     //Borrado físico
     // const user = await User.findByIdAndDelete(id);
+    // const uid = req.uid;
 
     const user = await User.findByIdAndUpdate(id, {state: false});
+    const userAuthenticated = req.userAuthenticated;
 
     res.json({
         result: true,
-        user
+        user,
+        userAuthenticated
     });
 };
 
