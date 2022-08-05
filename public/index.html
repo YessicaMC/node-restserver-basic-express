@@ -38,7 +38,12 @@
             //Google Token: ID Token
             // console.log(response.credential);
             const body = { id_token: response.credential};
-            fetch('http://localhost:8081/api/auth/google', {
+
+            var url = (window.location.hostname.includes('localhost'))
+                ? 'http://localhost:8081/api/auth/google'
+                : 'https://restserver-node-mzdev.herokuapp.com/api/auth/google'
+
+            fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-type' : 'application/json'
@@ -47,9 +52,10 @@
             })
                 .then( resp => resp.json() )
                 .then( resp => {
-                    console.log(resp)
                     localStorage.setItem('email', resp.user.email);
                     location.reload();
+                    
+                    console.log(resp)
                 })
                 .catch(console.warn);
         }
