@@ -50,10 +50,22 @@ const productExistsById = async (id = '') => {
     }
 }
 
+/**
+ * Valid collections
+ */
+const isValidCollection = (collection, validCollections = []) => {
+    const includes = validCollections.includes(collection);
+    if(!includes){
+        throw new Error(`Collection "${collection}" is not valid, only "${validCollections}" are permitted`)
+    } 
+    return true;
+}
+
 module.exports = {
     isValidRole,
     emailAlreadyExists,
     userExistsById,
     categoryExistsById,
-    productExistsById
+    productExistsById,
+    isValidCollection
 }

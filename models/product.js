@@ -21,6 +21,9 @@ const ProductSchema = Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User'
+    },
+    image: {
+        type: String
     }
 });
 
